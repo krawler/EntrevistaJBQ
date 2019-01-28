@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="main" template="/views/templates/main.jsp">
+		<put-attribute name="titulo" value="Desafio Lecom"/>
+		<put-attribute name="cabecalho" value="/views/templates/cabecalho.jsp"/>
+		<put-attribute name="menu" value="/views/templates/menu.jsp"/>
+		<put-attribute name="rodape" value="/views/templates/rodape.jsp"/>
+	</definition> 
+	
+	<definition name="index"  extends="main" >
+    	<put-attribute name="conteudo" value="/views/index.jsp"/>
+    </definition>
+    
+    <definition name="cliente/cadastro" extends="main">
+    	<put-attribute name="conteudo">/views/cliente/cadastro.jsp</put-attribute>
+    </definition>
+    
+    <definition name="cliente/listar" extends="main">
+    	<put-attribute name="conteudo">/views/cliente/listar.jsp</put-attribute>
+    </definition>
+    
+    <definition name="servico/listar" extends="main">
+    	<put-attribute name="conteudo">/views/servico/listar.jsp</put-attribute>
+    </definition>
+    
+    <definition name="ordem/cadastro" extends="main">
+    	<put-attribute name="conteudo">/views/ordem/cadastro.jsp</put-attribute>
+    </definition>
+    
+    <definition name="ordem/listar" extends="main">
+    	<put-attribute name="conteudo">/views/ordem/listar.jsp</put-attribute>
+    </definition>
+    
+    <definition name="ordem/visualizar" extends="main">
+    	<put-attribute name="conteudo">/views/ordem/visualizar.jsp</put-attribute>
+    </definition>
+    
+</tiles-definitions>

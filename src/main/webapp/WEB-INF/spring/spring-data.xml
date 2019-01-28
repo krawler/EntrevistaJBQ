@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+	<!-- Entity manager persistence -->
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="DesafioLecomPU" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="hibernateVendor" />
+		<property name="packagesToScan">
+			<list>
+				<value>br.com.ebdes.desafiolecom.entidades</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="hibernateVendor"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="true" />
+		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
+		<property name="database" value="MYSQL"/>
+	</bean>
+	
+	<!-- Hibernate Session Factory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<array>
+				<value>br.com.ebdes.desafiolecom.entidades.Cliente</value>
+				<value>br.com.ebdes.desafiolecom.entidades.Servico</value>
+				<value>br.com.ebdes.desafiolecom.entidades.OrdemServico</value>
+			</array>
+		</property>		
+	</bean>
+	
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://RAFAELPC/desafiolecom" />
+		<property name="user" value="root" />
+		<property name="password" value="1234" />
+		
+		<property name="maxPoolSize" value="10"/>
+		<property name="acquireIncrement" value="1"/>
+		<property name="maxIdleTime" value="120"/>
+		<property name="acquireRetryAttempts" value="10"/>
+		<property name="initialPoolSize" value="10"/>
+	</bean>
+	
+	<!-- gerenciador de Transaçao -->
+	<!-- 
+	<tx:advice transaction-manager="transactionManager" id="txAdvice">
+		<tx:attributes>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* br.com.ebdes.desafiolecom.dao.impl.*.*(..) )" />
+	</aop:config>
+	 -->
+	 <tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 								 	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	-->
+	<!-- transaction manager of entity manager jpa  --> 
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+</beans>
