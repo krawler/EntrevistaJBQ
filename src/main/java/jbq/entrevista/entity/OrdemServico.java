@@ -31,13 +31,7 @@ public class OrdemServico {
 	private Cliente cliente;
 	@ManyToOne
 	private Servico servico;
-	@Temporal(value=TemporalType.DATE)
-	private Date dataInicio;
-	@Temporal(value=TemporalType.DATE)
-	private Date dataFim;
-	@Transient
-	private Integer diasRestantes;
-
+	
 	public OrdemServico(){
 	}
 
@@ -47,8 +41,6 @@ public class OrdemServico {
 		this.id = id;
 		this.cliente = cliente;
 		this.servico = servico;
-		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
 	}
 
 	public Long getId() {
@@ -75,33 +67,4 @@ public class OrdemServico {
 		this.servico = servico;
 	}
 
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataFim() {
-		return dataFim;
-	}
-
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
-	}
-	
-	public Integer getDiasRestantes() {
-	
-		Calendar data1 = Calendar.getInstance(); 
-		Calendar data2 = Calendar.getInstance();
-		data1.setTime(new Date()); 
-		data2.setTime(getDataFim());  
-		 
-		return data2.get(Calendar.DAY_OF_YEAR) - data1.get(Calendar.DAY_OF_YEAR);
-	}
-	
-	public void setDiasRestantes(Integer diasRestantes){
-		this.diasRestantes = diasRestantes;
-	}
 }

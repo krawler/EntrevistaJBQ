@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.ebdes.desafiolecom.dao.DAOCliente;
-import br.com.ebdes.desafiolecom.dao.DAOOrdemServico;
-import br.com.ebdes.desafiolecom.dao.DAOServico;
-import br.com.ebdes.desafiolecom.entidades.Cliente;
-import br.com.ebdes.desafiolecom.entidades.OrdemServico;
+import jbq.entrevista.dao.DAOCliente;
+import jbq.entrevista.entity.Cliente;
 
 @Controller
 @RequestMapping("/cliente")

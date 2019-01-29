@@ -22,14 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.ebdes.desafiolecom.controladores.conversores.ClientePropertyEditor;
-import br.com.ebdes.desafiolecom.controladores.conversores.ServicoPropertyEditor;
-import br.com.ebdes.desafiolecom.dao.DAOCliente;
-import br.com.ebdes.desafiolecom.dao.DAOOrdemServico;
-import br.com.ebdes.desafiolecom.dao.DAOServico;
-import br.com.ebdes.desafiolecom.entidades.Cliente;
-import br.com.ebdes.desafiolecom.entidades.OrdemServico;
-import br.com.ebdes.desafiolecom.entidades.Servico;
+import jbq.entrevista.dao.DAOCliente;
+import jbq.entrevista.dao.DAOOrdemServico;
+import jbq.entrevista.dao.DAOServico;
+import jbq.entrevista.entity.Cliente;
+import jbq.entrevista.entity.OrdemServico;
+import jbq.entrevista.entity.Servico;
 
 @Controller
 public class OrdemServicoController {
@@ -42,12 +40,7 @@ public class OrdemServicoController {
 	private DAOOrdemServico daoOrdemServico;
 	
 	private List<Servico> servicos;
-	
-	@InitBinder  
-    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {  
-        binder.registerCustomEditor(Cliente.class, new ClientePropertyEditor(daoCliente));
-        binder.registerCustomEditor(Servico.class, new ServicoPropertyEditor(daoServico));
-    }  
+	  
 	
 	@RequestMapping("ordem/listar")
 	public String listar(Map<String, Object> model){
@@ -85,17 +78,13 @@ public class OrdemServicoController {
 	
 	@RequestMapping(value="ordem/incluir",method=RequestMethod.POST)
 	public String incluir(@Valid OrdemServico ordemServico, BindingResult result, HttpSession sessao){
-	
-		ordemServico.setDataInicio(new Date());
-		
 		System.out.println(ordemServico.getServico());
 		daoOrdemServico.persistir(ordemServico);
 		return "redirect:listar";
 	}
 	
 	@RequestMapping(value="ordem/finalizar",method=RequestMethod.POST)
-	public String finalizar(@Valid OrdemServico ordemServico, BindingResult result, HttpSession sessao){
-		ordemServico.setDataFim(new Date());
+	public String finalizar(@Valid OrdemServico ordemServico, BindingResult result, HttpSession sessao){		
 		daoOrdemServico.persistir(ordemServico);
 		return "redirect:listar";
 	}

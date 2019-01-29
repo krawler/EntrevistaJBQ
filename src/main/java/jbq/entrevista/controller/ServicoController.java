@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.ebdes.desafiolecom.dao.DAOServico;
-import br.com.ebdes.desafiolecom.entidades.Cliente;
-import br.com.ebdes.desafiolecom.entidades.Servico;
+import jbq.entrevista.dao.DAOServico;
+import jbq.entrevista.entity.Servico;
 
 @RequestMapping("/servico")
 @Controller
@@ -19,9 +18,10 @@ public class ServicoController {
 	
 	@Autowired
 	private DAOServico daoServico;
-
+	
+	
 	@RequestMapping("/listar")
-	public ModelAndView listar(){
+	public ModelAndView listAll(){
 		return new ModelAndView("servico/listar")
 				.addObject("servicos", daoServico.list(0, 20))
 				.addObject("servico", new Servico());		
