@@ -31,7 +31,20 @@ public class Cliente {
 	
 	private Sexo sexo;
 	
-	private String telefone;
+	private String telefone;	
+	
+
+	public Cliente(Long id, String nome, String endereco, Date dataNasc, List<OrdemServico> ordens, Sexo sexo,
+			String telefone) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.endereco = endereco;
+		this.dataNasc = dataNasc;
+		this.ordens = ordens;
+		this.sexo = sexo;
+		this.telefone = telefone;
+	}
 
 	public Long getId() {
 		return id;
@@ -93,6 +106,16 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", dataNasc=" + dataNasc
 				+ ", ordens=" + ordens + ", sexo=" + sexo + ", telefone=" + telefone + "]";
+	}
+	
+	public Cliente toDTO(jbq.entrevista.entity.Cliente cliente) {
+		return new Cliente(cliente.getId(), cliente.getNome(), cliente.getEndereco(), cliente.getDataNasc(), 
+							cliente.getOrdens(), cliente.getSexo(), cliente.getTelefone());
+	}
+	
+	public jbq.entrevista.entity.Cliente toEntity(Cliente cliente){
+		return new jbq.entrevista.entity.Cliente(cliente.getId(), cliente.getNome(), cliente.getEndereco(), cliente.getDataNasc(), 
+												 cliente.getOrdens(), cliente.getSexo(), cliente.getTelefone());
 	}
 			
 }
