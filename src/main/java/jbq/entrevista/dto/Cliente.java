@@ -13,10 +13,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import jbq.entrevista.entity.OrdemServico;
 import jbq.entrevista.enuns.Sexo;
 
+@XmlRootElement
 public class Cliente {
 		
 	private Long id;
@@ -33,6 +35,10 @@ public class Cliente {
 	
 	private String telefone;	
 	
+	public Cliente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Cliente(Long id, String nome, String endereco, Date dataNasc, List<OrdemServico> ordens, Sexo sexo,
 			String telefone) {

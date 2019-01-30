@@ -1,5 +1,6 @@
 package jbq.entrevista.entity;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @XmlRootElement
 @Entity
-public class OrdemServico {
+public class OrdemServico implements Serializable {
+	
+	private static final long serialVersionUID = 7166566746379362785L;
 	
 	@Id @Column @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -35,8 +38,7 @@ public class OrdemServico {
 	public OrdemServico(){
 	}
 
-	public OrdemServico(Long id, Cliente cliente, Servico servico,
-			Date dataInicio, Date dataFim) {
+	public OrdemServico(Long id, Cliente cliente, Servico servico) {
 		super();
 		this.id = id;
 		this.cliente = cliente;
@@ -66,5 +68,6 @@ public class OrdemServico {
 	public void setServicos(Servico servico) {
 		this.servico = servico;
 	}
+	
 
 }

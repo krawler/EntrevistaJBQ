@@ -21,7 +21,7 @@ public class ServicoController {
 	
 	
 	@RequestMapping("/listar")
-	public ModelAndView listAll(){
+	public ModelAndView listar(){
 		return new ModelAndView("servico/listar")
 				.addObject("servicos", daoServico.list(0, 20))
 				.addObject("servico", new Servico());		

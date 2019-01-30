@@ -20,6 +20,7 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public ModelAndView index(){
+		System.out.println("Esse index controller");		
 		return new ModelAndView("index")
 					.addObject("ordens", daoOrdemServico.list(0,20));
 	}

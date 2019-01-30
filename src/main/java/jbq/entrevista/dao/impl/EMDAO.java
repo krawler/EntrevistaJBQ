@@ -55,6 +55,13 @@ public abstract class EMDAO<T> implements DAOBase<T> {
 		return (result != null ? result : new ArrayList<T>());
 	}
 	
+	public List<T> list(String campoBanco, String valorCampo) throws Exception {
+		return (List<T>) getEntityManager()
+						.createQuery("from "+getClazz().getName()+" where "+campoBanco+"="+valorCampo)
+						.getResultList();
+	}
+	
+	
 	public List<T> listAll(){
 		return (List<T>) getEntityManager()
 							.createQuery("from "+getClazz().getName())

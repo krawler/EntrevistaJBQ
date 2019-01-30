@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import jbq.entrevista.dao.DAOCliente;
-import jbq.entrevista.entity.Cliente;
+import jbq.entrevista.dto.Cliente;
 
 @Controller
 @RequestMapping("/cliente")
@@ -33,7 +33,7 @@ public class ClienteController {
 	@RequestMapping("/cadastro")
 	public ModelAndView cadastro(){
 		ModelAndView mav = new ModelAndView("cliente/cadastro");
-		mav.getModel().put("cliente", new Cliente());
+		mav.getModel().put("cliente", new jbq.entrevista.entity.Cliente());
 		mav.getModel().put("campo", "");
 		return mav;
 	}
@@ -47,14 +47,14 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value="/incluir", method=RequestMethod.POST)
-	public String incluir(@Valid Cliente cliente, String campo){
-		daoCliente.persistir(cliente);
+	public String incluir(Cliente cliente, String campo){
+		daoCliente.persistir(cliente.toEntity(cliente));
 		return "redirect:listar";
 	}
 	
 	@RequestMapping(value="/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id){
-		Cliente cliente = daoCliente.get(id);
+	 	jbq.entrevista.entity.Cliente cliente = daoCliente.get(id);
 		daoCliente.excluir(cliente);
 		return "redirect:../listar";
 	}

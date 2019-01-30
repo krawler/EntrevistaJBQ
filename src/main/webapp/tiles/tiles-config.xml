@@ -6,7 +6,7 @@
 <tiles-definitions>
 
 	<definition name="main" template="/views/templates/main.jsp">
-		<put-attribute name="titulo" value="Desafio Lecom"/>
+		<put-attribute name="titulo" value="Entrevista JBQ"/>
 		<put-attribute name="cabecalho" value="/views/templates/cabecalho.jsp"/>
 		<put-attribute name="menu" value="/views/templates/menu.jsp"/>
 		<put-attribute name="rodape" value="/views/templates/rodape.jsp"/>
